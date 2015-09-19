@@ -21,8 +21,9 @@ def combineSort(arr):
     if len(arr) < minrun:
         arr = insertionSort(arr)
     else:
-        arr[0:int(n / 2)] = combineSort(arr[0:int(n / 2)])
-        arr[int(n / 2):n] = combineSort(arr[int(n / 2):n])
+        arr[0:int(len(arr) / 2)] = combineSort(arr[0:int(len(arr) / 2)])
+        arr[int(len(arr) / 2):len(arr)] = combineSort(arr[int(len(arr) / 2):len(arr)])
+        arr = merge(arr, 0, int(len(arr) / 2), len(arr))
     return arr
 
 def merge(arr, left, mid, right):
@@ -55,5 +56,4 @@ arr = [int(elem) for elem in stdin.readline().split(' ')]
 n = len(arr)
 minrun = countMin(n)
 arr = combineSort(arr)
-arr = merge(arr, 0, int(n / 2), n)
 print(arr)
