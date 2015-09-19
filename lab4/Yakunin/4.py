@@ -10,19 +10,21 @@ def insertSort(arr):
 
 def merge(left,right):
     result = []
-    while len(left) > 0 and len(right) > 0:
-        if left[0] <= right[0]:
-            result.append(left[0])
-            left.pop(0)
+    a = 0
+    b = 0
+    while a < len(left) and b < len(right):
+        if left[a] <= right[b]:
+            result.append(left[a])
+            a += 1
         else:
-            result.append(right[0])
-            right.pop(0)
-    while len(left) > 0:
-        result.append(left[0])
-        left.pop(0)
-    while len(right) > 0:
-        result.append(right[0])
-        right.pop(0)
+            result.append(right[b])
+            b += 1
+    while a < len(left):
+        result.append(left[a])
+        a += 1
+    while b < len(left):
+        result.append(right[b])
+        b += 1
     return result
 
 def mergeSort(arr):
