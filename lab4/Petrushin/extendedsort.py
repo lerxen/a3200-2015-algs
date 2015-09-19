@@ -26,26 +26,6 @@ def merge(li1, li2):
     return res
 
 
-def mergesort(li):
-    length = len(li)
-    n = 1
-    while n < length:
-        shift = 0
-        while shift < length:
-            if shift + n >= length:
-                break
-            if shift + n * 2 > length:
-                two_size = length - (shift + n)
-            else:
-                two_size = n
-            arr2 = merge(li[shift:shift + n], li[shift + n:shift + n + two_size])
-            for i in range(0, n + two_size):
-                li[shift + i] = arr2[i]
-            shift += n * 2
-        n *= 2
-    return li
-
-
 def insertionsort(li):
     for i in range(1, len(li)):
         j = i
@@ -55,13 +35,13 @@ def insertionsort(li):
     return li
 
 
-def extendedsort(li):
+def extendedmergesort(li):
     if len(li) < 100:
         return insertionsort(li)
     else:
-        return merge(extendedsort(li[0:len(li) // 2]), extendedsort(li[len(li) // 2 + 1:len(li)]))
+        return merge(extendedmergesort(li[0:len(li) // 2]), extendedmergesort(li[len(li) // 2 + 1:len(li)]))
 
 
 lis = [int(n) for n in stdin.readline().split(" ")]
-for i in extendedsort(lis):
+for i in extendedmergesort(lis):
     stdout.write(str(i) + " ")
