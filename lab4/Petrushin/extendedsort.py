@@ -56,7 +56,7 @@ def insertionsort(li):
 
 
 def extendedsort(li):
-    if len(li) < 10:
+    if len(li) < 100:
         return insertionsort(li)
     else:
         return merge(extendedsort(li[0:len(li) // 2]), extendedsort(li[len(li) // 2 + 1:len(li)]))
