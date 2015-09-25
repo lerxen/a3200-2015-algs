@@ -1,6 +1,7 @@
 __author__ = 'Laz.Go'
 
 from sys import stdin
+from sys import stdout
 import random
 
 def quicksort(array):
@@ -21,6 +22,5 @@ def quicksort(array):
             right.append(array[i])
     return quicksort(left) + middle + quicksort(right)
 
-array = [int(s) for s in stdin.readline().split()]
-array = quicksort(array)
-print(array)
+for inc in quicksort([int(inc) for inc in stdin.readline().split(" ")]):
+    stdout.write(str(inc) + " ")
