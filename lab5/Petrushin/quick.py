@@ -5,23 +5,32 @@ from sys import stdout
 import random
 
 
-def quicksort(arr):
-    if len(arr) <= 1:
-        return arr
+def quicksort(arr, begin, end):
+    if end < begin + 2:
+        return
     rand = random.Random()
-    pivot = arr[rand.randrange(0, len(arr))]
-    lt = []
-    gt = []
-    eq = []
-    for i in range(0, len(arr)):
-        if arr[i] == pivot:
-            eq.append(arr[i])
-        elif arr[i] < pivot:
-            lt.append(arr[i])
+    pivot = arr[rand.randrange(begin, end)]
+    lt = begin
+    gt = end
+    i = begin
+    while i < gt:
+        if arr[i] < pivot:
+            arr[i], arr[lt] = arr[lt], arr[i]
+            lt += 1
+            i += 1
         elif arr[i] > pivot:
-            gt.append(arr[i])
-    return quicksort(lt) + eq + quicksort(gt)
+            gt -= 1
+            arr[i], arr[gt] = arr[gt], arr[i]
+        elif arr[i] == pivot:
+            i += 1
+    quicksort(arr, begin, lt)
+    quicksort(arr, gt, end)
 
 
-for elem in quicksort([int(elem) for elem in stdin.readline().split(" ")]):
-    stdout.write(str(elem) + " ")
+def extended_quicksort(arr):
+    quicksort(arr, 0, len(arr))
+    return arr
+
+
+for element in extended_quicksort([int(elem) for elem in stdin.readline().split(" ")]):
+    stdout.write(str(element) + " ")
