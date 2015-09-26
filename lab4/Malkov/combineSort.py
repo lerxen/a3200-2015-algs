@@ -8,22 +8,22 @@ def countMin(n):
     return n + flag
 
 def insertionSort(arr):
-    for i in range(0, len(arr)):
-        j = i - 1
-        while j >= 0 and arr[j] > arr[j + 1]:
-            x = arr[j + 1]
-            arr[j + 1] = arr[j]
-            arr[j] = x
-            j -= 1
+    for j in range(1, len(arr)):
+        key = arr[j]
+        i = j - 1
+        while i > 0 and arr[i] > key:
+            arr[i + 1] = arr[i]
+            i = i - 1
+        arr[i + 1] = key
     return arr
             
 def combineSort(arr):
     if len(arr) < minrun:
         arr = insertionSort(arr)
     else:
-        arr[0:int(len(arr) / 2)] = combineSort(arr[0:int(len(arr) / 2)])
+        arr[0:int(len(arr) / 2) + 1] = combineSort(arr[0:int(len(arr) / 2) + 1])
         arr[int(len(arr) / 2):len(arr)] = combineSort(arr[int(len(arr) / 2):len(arr)])
-        arr = merge(arr, 0, int(len(arr) / 2), len(arr))
+        arr = merge(arr, 0, int(len(arr) / 2) + 1, len(arr))
     return arr
 
 def merge(arr, left, mid, right):
@@ -46,14 +46,11 @@ def merge(arr, left, mid, right):
     while mid + it2 < right:
         result[it1 + it2] = arr[mid + it2]
         it2 += 1
-  
-    for i in range(0, it1 + it2):
-        arr[left + i] = result[i]
-    
+
     return result
         
 arr = [int(elem) for elem in stdin.readline().split(' ')]
 n = len(arr)
 minrun = countMin(n)
 arr = combineSort(arr)
-print(arr)
+stdout.write(" ".join(map(str, arr)))
