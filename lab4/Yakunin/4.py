@@ -1,6 +1,6 @@
 from sys import stdin
 
-def insertSort(arr):
+def insertsort(arr):
     for i in range(1, len(arr)):
         j = i
         while j > 0 and arr[j - 1] > arr[j]:
@@ -22,12 +22,12 @@ def merge(left,right):
     while a < len(left):
         result.append(left[a])
         a += 1
-    while b < len(left):
+    while b < len(right):
         result.append(right[b])
         b += 1
     return result
 
-def mergeSort(arr):
+def mergesort(arr):
     if len(arr) <= 1:
         return arr
     else:
@@ -39,14 +39,15 @@ def mergeSort(arr):
         for i in range(middle, len(arr)):
             right.append(arr[i])
         if len(left) > 100:
-            left = mergeSort(left)
+            left = mergesort(left)
         else:
-            left = insertSort(left)
+            left = insertsort(left)
         if len(right) > 100:
-            right = mergeSort(right)
+            right = mergesort(right)
         else:
-            right = insertSort(right)
+            right = insertsort(right)
         return merge(left, right)
 
 arr = [int(n) for n in stdin.readline().split(" ")]
-print(mergeSort(arr))
+for x in mergesort(arr):
+    print(x, end=" ")

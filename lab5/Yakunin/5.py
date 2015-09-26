@@ -1,28 +1,27 @@
 from sys import stdin
 import random
 
-def quicksort(arr):
-    left = []
-    med = []
-    right = []
-
-    if len(arr) > 1:
-        r = random.randint(0,len(arr) - 1)
-        pt = arr[r]
-        for x in arr:
-            if x < pt:
-                left.append(x)
-            if x == pt:
-                med.append(x)
-            if x > pt:
-                right.append(x)
-        left = quicksort(left)
-        right = quicksort(right)
-        ans = left + med + right
-        return ans    
-    else:
-        return arr
+def quicksort(arr, left, right):
+    if right - left > 1:
+        pt = arr[random.randint(left, right - 1)]
+        lside = left
+        rside = right
+        i = left
+        while i < rside:
+            if arr[i] == pt:
+                i += 1
+            elif arr[i] < pt:
+                arr[i], arr[lside] = arr[lside], arr[i]
+                lside += 1
+                i += 1
+            else:
+                rside -= 1
+                arr[i], arr[rside] = arr[rside], arr[i]
+        quicksort(arr, left, lside)
+        quicksort(arr, rside, right)
+    return arr
 
 arr = [int(n) for n in stdin.readline().split(" ")]
 random.seed()
-print(quicksort(arr))
+for x in quicksort(arr, 0, len(arr)):
+    print(x, end=" ")
