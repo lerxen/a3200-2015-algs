@@ -4,23 +4,33 @@ from sys import stdin
 from sys import stdout
 import random
 
-def quicksort(array):
-    if len(array) < 2:
-        return array
 
+def quicksort(array, begin, end):
+    if end < begin + 2:
+        return
     rand = random.Random()
-    key = array[rand.randrange(0, len(array))]
-    left = []
-    middle = []
-    right = []
-    for i in range(0, len(array)):
-        if array[i] == key:
-            middle.append(array[i])
-        elif array[i] < key:
-            left.append(array[i])
-        elif array[i] > key:
-            right.append(array[i])
-    return quicksort(left) + middle + quicksort(right)
+    pivot = array[rand.randrange(begin, end)]
+    left = begin
+    right = end
+    mid= begin
+    while mid< right:
+        if array[mid] < pivot:
+            array[mid], array[left] = array[left], array[mid]
+            left += 1
+            mid+= 1
+        elif array[mid] > pivot:
+            right -= 1
+            array[mid], array[right] = array[right], array[mid]
+        elif array[mid] == pivot:
+            mid+= 1
+    quicksort(array, begin, left)
+    quicksort(array, right, end)
 
-for inc in quicksort([int(inc) for inc in stdin.readline().split(" ")]):
-    stdout.write(str(inc) + " ")
+
+def extended_quicksort(array):
+    quicksort(array, 0, len(array))
+    return array
+
+
+for element in extended_quicksort([int(elem) for elem in stdin.readline().split(" ")]):
+    stdout.write(str(element) + " ")
