@@ -1,8 +1,8 @@
 from sys import stdin
 import math
+import sys
 
-
-elem = [int(s) for s in stdin.readline().split()]
+elements = [int(s) for s in stdin.readline().split()]
 
 
 def i_digit(n, i):
@@ -15,34 +15,36 @@ def h_m_digits(n):
     return t
 
 
-def k_max(elem):
-    max = elem[0]
-    for i in range(1, len(elem)):
-        if max < elem[i]:
-            max = elem[i]
+def maximum(array):
+    max = array[0]
+    for i in range(1, len(array)):
+        if max < array[i]:
+            max = array[i]
     return max
 
 
-def counting_sort(elem, f):
-    final = [0 for x in range(len(elem))]
+def counting_sort(array, f):
+    final = [0 for x in range(len(array))]
     order = [0 for x in range(10)]
-    for j in range(len(elem)):
-        order[i_digit(elem[j], f)] += 1
+    for j in range(len(array)):
+        order[i_digit(array[j], f)] += 1
     for i in range(1, 10):
         order[i] += order[i - 1]
-    j = len(elem) - 1
+    j = len(array) - 1
     while j >= 0:
-        order[i_digit(elem[j], f)] -= 1
-        final[order[i_digit(elem[j], f)]] = elem[j]
+        order[i_digit(array[j], f)] -= 1
+        final[order[i_digit(array[j], f)]] = array[j]
         j -= 1
     return final
 
 
-def radix_sort(elem):
-    n = h_m_digits(k_max(elem))
+def radix_sort(array):
+    n = h_m_digits(maximum(array))
     for i in range(0, n):
-        elem = counting_sort(elem, i)
-    return elem
+        array = counting_sort(array, i)
+    return array
 
 
-print(radix_sort(elem))
+elements = radix_sort(elements)
+for i in elements:
+    sys.stdout.write(str(i) + ' ')
