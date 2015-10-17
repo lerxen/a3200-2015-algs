@@ -32,7 +32,7 @@ class TestSorting(unittest.TestCase):
         self.assertEqual(expected, res)
 
     def test_random(self):
-        arr = [random.randint(0, 100) for i in range(random.randint(10))]
+        arr = [random.randint(0, 100) for i in range(random.randint(0, 10))]
         res = radix.radix_sort(arr)
         arr.sort()
         self.assertFalse(not res)
