@@ -2,7 +2,7 @@ from sys import stdin
 import math
 import sys
 
-elements = [int(s) for s in stdin.readline().split()]
+
 
 
 def i_digit(n, i):
@@ -39,12 +39,15 @@ def counting_sort(array, f):
 
 
 def radix_sort(array):
+    if not array:
+        return [];
     n = h_m_digits(maximum(array))
     for i in range(0, n):
         array = counting_sort(array, i)
     return array
 
-
-elements = radix_sort(elements)
-for i in elements:
-    sys.stdout.write(str(i) + ' ')
+if __name__ == '__main__':
+    elements = [int(s) for s in stdin.readline().split()]
+    elements = radix_sort(elements)
+    for i in elements:
+        sys.stdout.write(str(i) + ' ')
