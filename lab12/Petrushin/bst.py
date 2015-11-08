@@ -2,11 +2,6 @@ __author__ = 'Dmitry Petrushin'
 __version__ = '3.4'
 
 
-def add_nodes(tree, array):
-    for i in range(len(array)):
-        tree.add(array[i])
-
-
 class Set:
     def add(self, value):
         pass
