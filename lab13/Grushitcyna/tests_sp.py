@@ -20,7 +20,6 @@ class TestSplayTree(unittest.TestCase):
             arr.append(v.key)
         expected = [0, 1, 16, 35, 96]
         self.assertEquals(expected, arr)
-#        self.assertTrue(t.contains(96))
 
     def test_contains_check(self):
         t = splay.SplayTree()
