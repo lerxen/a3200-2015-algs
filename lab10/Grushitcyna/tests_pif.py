@@ -2,7 +2,7 @@ import unittest
 import triples
 
 
-class TestSorting(unittest.TestCase):
+class TestPithagoras(unittest.TestCase):
 
     def test_example_from_exercises(self):
         arr = [23, 247, 19, 96, 264, 265, 132, 181]
