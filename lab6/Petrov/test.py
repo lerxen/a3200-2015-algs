@@ -19,8 +19,8 @@ class TestSorting(unittest.TestCase):
 
     def test_alot(self):
         arr = [random.randint(0, 10000) for i in range(100000)]
-        arr.sort()
         res = lab6.radixsort(arr)
+        arr.sort()
         self.assertFalse(not res)
         self.assertEqual(arr, res)
 
