@@ -1,6 +1,14 @@
 import math
 
 def radixsort(array):
+    if len(array) == 0:
+        return array
+    min = array[0]
+    for i in range(len(array)):
+        if array[i] < min:
+            min = array[i]
+    for i in range(len(array)):
+        array[i] -= min
     maxLen = -1
     for n in array:
         if (n == 0):
@@ -17,4 +25,6 @@ def radixsort(array):
         for bucket in buckets:
             array.extend(bucket)
             del bucket[:]
+    for i in range(len(array)):
+        array[i] += min
     return array
