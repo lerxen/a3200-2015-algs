@@ -1,0 +1,17 @@
+from sys import stdin
+
+first_line = int(stdin.readline())
+second_line = stdin.readline()
+mas = [int(s) for s in second_line.split(' ')]
+mas.sort()
+array = [0 for i in (range(first_line+1))]
+array[0] = 1
+
+for i in range(0, len(mas)):
+    p = mas[i]
+    mon = p
+    while p < len(array):
+        array[p] += array[p-mon]
+        p = p + 1
+
+print(array[first_line])
