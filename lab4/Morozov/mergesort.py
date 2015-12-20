@@ -1,6 +1,4 @@
 import sys
-import random
-import time
 
 __author__ = 'vks'
 
@@ -34,23 +32,30 @@ def insertion_sort(array, l, r):
             j -= 1
 
 
-def mergesort(array, l, r, threshold):
+def sort(array, l, r, threshold):
     if r - l <= threshold:
         insertion_sort(array, l, r)
     else:
         mid = (l + r) // 2
-        mergesort(array, l, mid, threshold)
-        mergesort(array, mid, r, threshold)
+        sort(array, l, mid, threshold)
+        sort(array, mid, r, threshold)
         merge(array, l, mid, r)
 
 
-elements = [int(s) for s in sys.stdin.readline().split()]
-mergesort(elements, 0, len(elements) - 1, 10)
-for i in elements:
-    sys.stdout.write(str(i) + ' ')
+def merge_sort(array):
+    lo = 0
+    hi = len(array) - 1
+    sort(array, lo, hi, 10)
 
-#Empirically found best threshold = 10 using this code:
-#for i in range(1, 20):
+
+if __name__ == "__main__":
+    elements = [int(s) for s in sys.stdin.readline().split()]
+    merge_sort(elements)
+    for i in elements:
+        sys.stdout.write(str(i) + ' ')
+
+# Empirically found best threshold = 10 using this code:
+# for i in range(1, 20):
 #    elements = [random.randint(0, 1000) for j in range(100000)]
 #    time1 = time.time()
 #    mergesort(elements, 0, len(elements) - 1, i)
