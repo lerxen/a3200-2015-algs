@@ -14,7 +14,7 @@ class TestDjkstra(unittest.TestCase):
         graph.add_direct_link(1, 2, 1)
         graph.add_direct_link(3, 2, 8)
         res = graph.paths(0)
-        expected = [0, 2, 3, 2**256]
+        expected = [0, 2, 3, None]
         self.assertEquals(expected, res)
         
     def test_the_simplest(self):
