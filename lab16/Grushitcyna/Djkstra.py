@@ -48,6 +48,9 @@ class WeightedGraph:
             S.append(u)
             for v in u.weight:
                 self.relax(u.name, v, u.weight[v])
+        for i in self.graph:
+            if i.distance == 2**256:
+                i.distance = None
         return [i.distance for i in self.graph]
 
 
